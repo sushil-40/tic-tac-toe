@@ -32,8 +32,14 @@ body {
   border: none;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.3);
   font-size: 8vmin;
-  color: #b0413e;
+
   background-color: #efffc8;
+}
+.o-color {
+  color: #b0413e;
+}
+.x-color {
+  color: #007ea7;
 }
 #reset-btn {
   padding: 1rem;

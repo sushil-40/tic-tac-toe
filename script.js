@@ -14,28 +14,35 @@ const winPatterns = [
   [1, 4, 7],
   [2, 5, 8],
   [2, 4, 6],
-  [3, 4, 8],
+  [3, 4, 5],
   [6, 7, 8],
 ];
 
+let btnClickCount = 0;
 const resetGame = () => {
   turnO = true;
   enableBoxes();
   msgContainer.classList.add("hide");
 };
+
 boxes.forEach((box) => {
   box.addEventListener("click", () => {
-    console.log("box is clicked!");
-    box.innerText = "ABCD";
+    btnClickCount++;
+
     if (turnO) {
       box.innerText = "O";
+      box.classList.add("o-color");
       turnO = false;
     } else {
       box.innerText = "X";
+      box.classList.add("x-color");
+
       turnO = true;
     }
     box.disabled = true;
     checkWinner();
+
+    checkDraw();
   });
 });
 
@@ -65,10 +72,19 @@ const checkWinner = () => {
       if (pos1val === pos2val && pos2val === pos3val) {
         console.log(`Winner ${pos1val}`);
         showWinner(pos1val);
+        btnClickCount = 0;
       }
     }
   }
 };
 
+const checkDraw = () => {
+  if (btnClickCount === 9) {
+    msg.innerText = `Game is tie.`;
+    msgContainer.classList.remove("hide");
+    btnClickCount = 0;
+    disableBoxes();
+  }
+};
 newGameBtn.addEventListener("click", resetGame);
 resetBtn.addEventListener("click", resetGame);
